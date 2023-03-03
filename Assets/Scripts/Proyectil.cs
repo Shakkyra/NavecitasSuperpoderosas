@@ -15,24 +15,19 @@ public class Proyectil : MonoBehaviour
 
     private GUIManager _gui;
     
-    void Start() 
-    {
+    void Start(){
+        // NOTA 
+        // si se crea un objeto dinamicamente es importante tener al menos una estrategia de destrucción
 
-        // NOTA IMPORTANTE
-        // si voy a crear objetos dinámicamente
-        // es indispensable que tenga al menos 1 estrategia de destrucción
-        
-        // destroy - destruye game objects completos
-        // o componentes
-        
+        // destroy - destruye game objects completos o componentes 
+        //Destroy (gameObject);
         Destroy(gameObject, _tiempoDeAutodestruccion);
 
-        // NOTA- ESTO VA A CAMBIAR
-        GameObject guiGO = GameObject.Find("GUIManager");
-        Assert.IsNotNull(guiGO, "no hay GUIManager");
+        GameObject guiGo = GameObject.Find("GUIManager");
+        Assert.IsNotNull(guiGo, "no hay GUIManager");
 
-        _gui = guiGO.GetComponent<GUIManager>();
-        Assert.IsNotNull(_gui, "GUIManager no tiene componente");
+        _gui = guiGo.GetComponent<GUIManager>();
+        Assert.IsNotNull(_gui,"GUIManager no tiene componente");
     }
 
     // Update is called once per frame
@@ -40,54 +35,46 @@ public class Proyectil : MonoBehaviour
     {
         transform.Translate(
             0,
-            _speed * Time.deltaTime,
-            0
+            0,
+            _speed * Time.deltaTime
         );
     }
- 
+
     // COLISIONES
-    // para checar colisiones con física necesitamos:
-    // 1. todos los objetos involucrados necesitan collider
-    // 2. necesitamos que al menos 1 tenga rigidbody
-    // 3. el rigidbody debe estar en un objeto que se mueva
+    // Se necesita:
+    //1. Todos los objetos involucrados necesitan collider
+    //2. Necestitamos que al menos 1 tenga rigidbody
+    //3. El rigidbody debe estar en un objeto que se mueva
 
-    // TODOS LOS INVOLUCRADOS PUEDEN TENER 
-    // SUS RESPECTIVOS MENSAJES DE REACCIÓN
+    void OnCollisionEnter(Collision c){
+        // objeto collision que recebimos 
+        // contiene info de la collision
 
-    void OnCollisionEnter(Collision c) 
-    {
-        // objeto collision que recibimos
-        // contiene info de la colisión
-        
-        // cómo saber qué hacer 
-        // 1. filtrar por tag
-        // 2. filtrar por layer
-        print("ENTER " + c.transform.name);
+        //como saber que hacer
+        //1. filtrar por tag
+        //2. filtrar por layer
+
+        print("Enter" + c.transform.name);
     }
 
-    void OnCollisionStay(Collision c) 
-    {
-        print("STAY");
+    void OnCollisionStay(Collision c){
+        print("Stay");
     }
 
-    void OnCollisionExit(Collision c) 
-    {
-        print("EXIT");
+    void OnCollisionExit(Collision c){
+        print("Exit");
     }
 
-    void OnTriggerEnter(Collider c)
-    {
+    void OnTriggerEnter(Collider c){
         print("TRIGGER ENTER");
     }
 
-    void OnTriggerStay(Collider c)
-    {
+    void OnTriggerStay(Collider c){
         print("TRIGGER STAY");
     }
 
-    void OnTriggerExit(Collider c)
-    {
+    void OnTriggerExit(Collider c){
         print("TRIGGER EXIT");
-        _gui._texto.text = "SALI " + transform.name;
+        _gui._texto.text = "SALI" + transform.name;
     }
 }
