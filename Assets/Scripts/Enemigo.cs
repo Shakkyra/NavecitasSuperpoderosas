@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 public class Enemigo : MonoBehaviour
 {
     [SerializeField]
-    private float _velocidad = 1;
+    private float _velocidad = -1;
 
     [SerializeField]
     private float _tiempoDeDestruccion = 5;
@@ -28,6 +28,12 @@ public class Enemigo : MonoBehaviour
             0
         );
         
+    }
+
+    void OnCollisionEnter(Collision c){
+        void OnTriggerEnter(Collider c){
+            Destroy(gameObject);
+        }
     }
 }
 
