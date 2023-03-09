@@ -67,9 +67,6 @@ public class Proyectil : MonoBehaviour
 
     void OnTriggerEnter(Collider c){
         print("TRIGGER ENTER");
-        float contadorPuntos = 0;
-        contadorPuntos = contadorPuntos + 10;
-        _gui._texto.text = contadorPuntos.ToString("0");
         Destroy(gameObject);
     }
 
