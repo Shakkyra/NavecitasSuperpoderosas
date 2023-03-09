@@ -28,13 +28,19 @@ public class Spawn : MonoBehaviour
             );
         }*/
         if(Input.GetButtonDown("Comienzo")){
-            Vector3 posicionRectangulo = _self.transform.position;
-            //Dividimos la pared en dos
-            float mitadRect = _self.transform.localScale.x / 2f;
-            //Elegimos una parte aleatoria
-            float posAleatoria = Random.Range(posicionRectangulo.x - mitadRect, posicionRectangulo.x + mitadRect);
-            Vector3 posicionSpawn = new Vector3(posAleatoria,posicionRectangulo.y,posicionRectangulo.z);
-            Instantiate(_enemigoOriginal,posicionSpawn,Quaternion.identity);
+            for(int i = 0; i<=10; i++){
+                Vector3 posicionRectangulo = _self.transform.position;
+                //Dividimos la pared en dos
+                float mitadRect = _self.transform.localScale.x / 2f;
+                //Elegimos una parte aleatoria
+                float posAleatoria = Random.Range(posicionRectangulo.x - mitadRect, posicionRectangulo.x + mitadRect);
+                Vector3 posicionSpawn = new Vector3(posAleatoria,posicionRectangulo.y,posicionRectangulo.z);
+                Instantiate(
+                    _enemigoOriginal,
+                    posicionSpawn,
+                    Quaternion.identity
+                );
+            }
         }
         
     }
