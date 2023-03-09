@@ -30,10 +30,9 @@ public class Enemigo : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision c){
-        void OnTriggerEnter(Collider c){
-            Destroy(gameObject);
-        }
+    void OnTriggerEnter(Collider c)
+    {
+        Destroy(gameObject);
     }
 }
 
