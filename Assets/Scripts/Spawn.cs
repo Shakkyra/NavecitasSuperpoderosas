@@ -5,13 +5,11 @@ using UnityEngine.Assertions;
 
 public class Spawn : MonoBehaviour
 {
-    public Enemigo enemies;
+    public GameObject[] enemies;
 
-    [SerializeField]
-    private float timeSpawn = 1;
+    public float timeSpawn = 1;
 
-    [SerializeField]
-    private float repeatSpawnRate = 3;
+    public float repeatSpawnRate = 3;
 
     public Transform xRangeLeft;
     public Transform xRangeRight;
@@ -21,7 +19,7 @@ public class Spawn : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemies",timeSpawn,repeatSpawnRate);
+        InvokeRepeating("SpawnEnmies",timeSpawn,repeatSpawnRate);
     }
    
 
@@ -29,12 +27,8 @@ public class Spawn : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(0, 0, 0);
 
-        spawnPosition = new Vector3(Random.Range(xRangeLeft.position.x, xRangeRight.position.x), Random.Range(yRangeDown.position.y, yRangeUp.position.y), 0);
+        spawnPosition = new Vector3(Random.Range(xRangeLeft.position.x,xRangeRight.position.x), Random.Range(yRangeDown.position.y,yRangeUp.position.y), 0);
 
-        GameObject enemie = Instantiate(
-                enemies,
-                spawnPosition,
-                gameObject.transform.rotation
-            );
+        GameObject enemie = Instantiate(enemies[Random.Range(0,enemies.Length)],spawnPosition,gameObject.transform.rotation);
     }
 }

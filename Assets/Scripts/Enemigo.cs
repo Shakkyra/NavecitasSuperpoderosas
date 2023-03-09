@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 public class Enemigo : MonoBehaviour
 {
     [SerializeField]
-    private float _velocidad = -1;
+    private float _velocidad = 1;
 
     [SerializeField]
     private float _tiempoDeDestruccion = 5;
@@ -22,16 +22,11 @@ public class Enemigo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(
-            0,
-            -(_velocidad * Time.deltaTime),
-            0
-        );
+        transform.position += -transform.up * Time.deltaTime * _velocidad;
         
     }
 
-    void OnTriggerEnter(Collider c)
-    {
+    void OnTriggerEnter(Collider c){
         Destroy(gameObject);
     }
 }
