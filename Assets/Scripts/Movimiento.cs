@@ -143,11 +143,13 @@ public class Movimiento : MonoBehaviour
 
             // si queremos un game object predefinido para clonar
             // usamos instantiate
+            /*
             Instantiate(
                 _disparoOriginal, 
                 transform.position, 
                 transform.rotation
             );
+            */
             _corrutina = StartCoroutine(DisparoRecurrente());
         }
 
