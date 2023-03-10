@@ -9,6 +9,9 @@ public class GUIManager : MonoBehaviour
     [SerializeField]
     public TMP_Text _texto;
 
+    private float contadorAumento = 10;
+    private float puntuacion = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +19,9 @@ public class GUIManager : MonoBehaviour
         _texto.text = "Presione E para comenzar";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActualizarMarcador() 
     {
-        
+        puntuacion += contadorAumento;
+        _texto.text = "Score: " + puntuacion; 
     }
 }

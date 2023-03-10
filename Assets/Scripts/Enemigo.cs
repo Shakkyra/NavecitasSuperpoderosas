@@ -42,14 +42,14 @@ public class Enemigo : MonoBehaviour
 
     void OnTriggerEnter(Collider c){
         Destroy(gameObject);
-        FindObjectOfType<Enemigo>().AddPuntuation(contadorAumento);
-        
+        //FindObjectOfType<Enemigo>().AddPuntuation(contadorAumento);
+        _gui.ActualizarMarcador();
     }
 
-    public void AddPuntuation(float puntuationValue){
+   /* public void AddPuntuation(float puntuationValue){
         puntuacion += puntuationValue;
         _gui._texto.text ="Score: " + puntuacion.ToString("0");
         
-    }
+    }*/
 }
 
