@@ -16,6 +16,10 @@ public class Movimiento : MonoBehaviour
     // voy a necesitar una referencia
     private Transform _transform;
 
+    private IEnumerator _ienumeratorCorrutina;
+
+    private Coroutine _corrutina;
+
     [SerializeField]
     private float _speed = 10;
 
@@ -49,6 +53,8 @@ public class Movimiento : MonoBehaviour
         Assert.IsNotNull(_transform, "ES NECESARIO PARA MOVIMIENTO TENER UN TRANSFORM");
         Assert.IsNotNull(_disparoOriginal, "DISPARO NO PUEDE SER NULO");
         Assert.AreNotEqual(0, _speed, "VELOCIDAD DEBE SER MAYOR A 0");
+
+        _ienumeratorCorrutina = DisparoRecurrente();
     }
 
     // Update is called once per frame
@@ -142,6 +148,11 @@ public class Movimiento : MonoBehaviour
                 transform.position, 
                 transform.rotation
             );
+            _corrutina = StartCoroutine(DisparoRecurrente());
+        }
+
+        if (Input.GetButtonUp("Jump")){
+            StopCoroutine(_corrutina);
         }
     }
 
@@ -162,4 +173,16 @@ public class Movimiento : MonoBehaviour
 
     // CÓDIGO MUY ÚTIL
     // HOLA ESTOY EN EL REPO!
+
+    IEnumerator DisparoRecurrente()
+    {
+        while (true)
+        {
+            Instantiate(_disparoOriginal,
+            transform.position,
+            transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+            print("Disparo recurrente");
+        }
+    }
 }
